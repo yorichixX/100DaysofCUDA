@@ -1,0 +1,26 @@
+### Heterogenous platforms:
+
+Systems that contain more than one type of processing units.
+
+Various types of processors:
+
+1. CPU 
+2. GPU
+3. FPGA(field-programmable gate arrays)- they are reconfigurable hardware which can be customized according to specific algorithms, they offer high efficiency and low latency for certain tasks/
+4. DSP(digital signal processors)
+5. NPU(neural processing units)/AI processors
+
+Basically the idea is, by offloading work suited to a specific type of processor, system can be extremely energy, power and cost efficient and achieve higher performance.
+
+.........................................................................................................................................................................................................
+
+# CUDA architecture:
+
+The processors that were made before the ones are based on CUDA architecture partitioned the resources into vertex and pixel shaders.
+CUDA processers have "unified shader pipeline", what it does is whenever a program/algorithm required general computation it makes all the ALUs on the chip to work towards it(general computation).
+In CUDA architecture the ALUs complied the IEEE requirements for single-precision floating point arithmetic, and were designed to use instruction-set tailored for general purpose computing rather than for graphics.
+This architectures based GPUS also allowed random read and write access to memory(wasn't possible in previous architectures!), as well as access to software-managed cache called shared memory. 
+This made GPUs do general computation along with normal graphics processing as well!
+
+Even with all these features to make general computing on GPU accessible and easier , it wouldn't be possible cause to use these features people would still have to use OpenGL and DirectX, they have to disguise their computations as graphics problem, and also they would have to write everything in graphics oriented shading language such as OpenGL's GLSL or Microsoft's HLSL.
+Therefore NVIDIA chose C so that it could be accessible to many people/developers, they did so after some months post launch of GTX 8800 where they made a compiler called CUDA C.
