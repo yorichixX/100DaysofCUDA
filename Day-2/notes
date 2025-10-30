@@ -18,18 +18,18 @@ i= blockIdx.x * blockDim.x + threadIdx.x (doing this for a single dimension, x).
 so lets say there are 2 blocks in each grid:
 the threadids would go something like 0 to 255 in block 0 and 256 to 511 in the block 1, and so on and so forth.
 
-`__global__`  -> it says the compiler that the function being declared is a CUDA C  kernel function.
+__global__  -> it says the compiler that the function being declared is a CUDA C  kernel function.
 
 
 
  
 Grid is like a 3-dimensional arrangement of block and block in turn is a 3-d arrangement of threads.
-###### 1. ``<<<a,b>>>``  -> This is called **execution function parameters** in a kernel call.
+  1. <<<a,b>>>  -> This is called **execution function parameters** in a kernel call.
 
 	   a-> grid dimension i.e number of block.
       b-> block dimension  i.e number of threads.
 
-  ###### 2. The above 2 parameters have a type called Dim3, which has three elements x,y,z.
+  2. The above 2 parameters have a type called Dim3, which has three elements x,y,z.
      ex:- dim3 dimGrid(32,1,1)-> if some dimension is unused we can set it 
      to 1.
 
