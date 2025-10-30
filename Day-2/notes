@@ -1,0 +1,40 @@
+ Host-> The CPU
+ Device-> The GPU
+
+when a host code calls a kernel, the CUDA run time system launches a grid of threads that are organized in two-level hierarchy.
+Each grid is organised as an array of thread blocks. All blocks in a grid are of same size, each block can contain 1024 threads in current systems.
+
+blockDim: No. of threads in a block.
+It is recommended that each dimension of a thread block contain threads= multiple of 32.
+
+threadIdx-> gives thread a unique co-ordinate within a block.
+threadIdx.x , threadIdx.y, threadIdx.z
+
+blockIdx-> gives all the threads in a block a common block coordinate.
+
+for calculating unique global index for a thread:
+i= blockIdx.x * blockDim.x + threadIdx.x (doing this for a single dimension, x).
+
+so lets say there are 2 blocks in each grid:
+the threadids would go something like 0 to 255 in block 0 and 256 to 511 in the block 1, and so on and so forth.
+
+`__global__`  -> it says the compiler that the function being declared is a CUDA C  kernel function.
+
+
+
+ 
+Grid is like a 3-dimensional arrangement of block and block in turn is a 3-d arrangement of threads.
+###### 1. ``<<<a,b>>>``  -> This is called **execution function parameters** in a kernel call.
+
+	   a-> grid dimension i.e number of block.
+      b-> block dimension  i.e number of threads.
+
+  ###### 2. The above 2 parameters have a type called Dim3, which has three elements x,y,z.
+     ex:- dim3 dimGrid(32,1,1)-> if some dimension is unused we can set it 
+     to 1.
+
+In CUDA C, the range of gridDim.x is 1 to  2^31 -1 and for gridDim.y and gridDim.z it is 1 to 2^16 -1.
+
+Logically, range for blockId.x is 0 to gridDim.x-1 
+
+
