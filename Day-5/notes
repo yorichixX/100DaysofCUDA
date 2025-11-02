@@ -1,0 +1,44 @@
+learnt about shared memory, __shared__
+learnt about __threadsync()
+learnt about the parallel reduction using tree-method, about race condition that could emerge if we don't manage the threads well.
+
+Learnt dot product. initially naively multiplied all the elements. 
+Now each thread contain the product, i.e [a1,a2,a3],[b1,b2,b3]
+
+i.e  threads contains a1.b1, a2.b2 and a3.b3 respectively. Now our job is to add these individual products, this is where we can parallelize our work.
+
+We have to keep in mind about the race condition, since we will be doing the sum in a share memory(lets say an array).
+
+Simple because each addition depends on previous partial result( i.e the product). That means, to get one total sum, we can’t have _every thread_ just add all numbers at once ,because they’d all be trying to write to the **same memory location**.
+
+What happens if all the threads add at once:
+`sum += cache[i];`
+
+All threads would try to update `sum` at the same time, this is called a **race condition**.
+Thread 1 reads sum=0, adds 1-> plans to write 1.
+Thread 2 also reads sum=0, adds 2-> plans to write 2.
+only 1 write wins. The other gets lost. We end up with garbage, not the correct total.
+
+For this we have to do, what we call as, Parallel reduction:
+where in , each thread adds a unique pair of elements- so no threads writes to the same spot.
+Then the other group stops, and the next group adds those partial sums, it repeats until only 1 thread has the total.
+
+So there aren't any data races, and its high parallelized.
+
+We have many methods to do this, 1 such method is Tree-based reduction.
+
+In tree based-reduction, in each iteration, we make half the threads work and then they write the result and then make the other half work and so on, until only 1 thread is left with the result!!
+
+Methods like this require __syncthreads()
+
+Learnt about __shared__ -> Type qualifier(keyword applied to a variable or a data type declaration to specify additional properties of the object being declared, beyond its fundamental data type, like int, float, char etc).
+
+Shared memory, which is small and fast and all the threads within the same block can access.
+It is much faster than global memory, because it lives on-chip.
+
+
+
+
+
+
+
