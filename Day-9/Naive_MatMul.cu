@@ -16,7 +16,7 @@ __global__ void matMul(float *A_d, float *B_d, float *C_d, int N, int M, int K)
     {
       sum += A_d[row*K+k]*B_d[k*N+col]; 
     }
-  C_d[row*N + col]= sum; 
+  C_d[row*M + col]= sum; 
   }
 }
 
